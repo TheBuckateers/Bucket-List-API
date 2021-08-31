@@ -11,7 +11,11 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
 const countryRouter = require("./routes/countryRouter");
+const foodRouter = require("./routes/foodRouter");
+const advisoryRouter = require("./routes/advisoryRouter");
 app.use("/country", countryRouter);
+app.use("/food", foodRouter);
+app.use("/advisory", advisoryRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
