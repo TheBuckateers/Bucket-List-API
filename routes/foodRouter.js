@@ -5,40 +5,28 @@ const router = express.Router();
 const axios = require("axios");
 
 router.get("/", getFoodList);
-router.get("/code/:code", getFoodByCode);
-router.get("/full/:name", getFoodByFullName);
-router.get("/partial/:name", getFoodByPartialName);
+router.get("/areas", listFoodAreas);
+router.get("/categories", listFoodCategories);
+router.get("/:id", getFoodById);
 
-// Function to get full country list from API
+// Function to get 1 random meal recipe
 async function getFoodList(req, res) {
   try {
-    // const countriesList = await axios("https://restcountries.eu/rest/v2/all");
-    res.send("Get Food List");
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-}
-
-// Get country by an international ISO 2 or 3 digit code. Returnes a single object
-async function getFoodByCode(req, res) {
-  try {
-    const searchCode = req.params.code;
-    const searchResult = await axios(
-      `https://restcountries.eu/rest/v2/alpha/${searchCode}`
+    const listRandomMeal = await axios(
+      "https://www.themealdb.com/api/json/v1/1/random.php"
     );
-    // console.log("By Code: ", searchResult.data);
-    res.send(searchResult.data);
+    res.send(listRandomMeal.data);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 }
 
-// Get country by full name matching
-async function getFoodByFullName(req, res) {
+// Get a meal by the meal ID number
+async function getFoodById(req, res) {
   try {
-    const searchName = req.params.name;
+    const searchCode = req.params.id;
     const searchResult = await axios(
-      `https://restcountries.eu/rest/v2/name/${searchName}?fullText=true`
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${searchCode}`
     );
     res.send(searchResult.data);
   } catch (err) {
@@ -46,14 +34,24 @@ async function getFoodByFullName(req, res) {
   }
 }
 
-// Get countries partial match of name. Returnes an array of objects.
-async function getFoodByPartialName(req, res) {
+// List all food areas available
+async function listFoodAreas(req, res) {
   try {
-    const searchName = req.params.name;
     const searchResult = await axios(
-      `https://restcountries.eu/rest/v2/name/${searchName}`
+      "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
     );
-    // console.log("Partial: ", searchResult.data);
+    res.send(searchResult.data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+// List all food categories available
+async function listFoodCategories(req, res) {
+  try {
+    const searchResult = await axios(
+      "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+    );
     res.send(searchResult.data);
   } catch (err) {
     res.status(500).json({ message: err.message });

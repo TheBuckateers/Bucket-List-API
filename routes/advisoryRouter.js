@@ -7,7 +7,7 @@ const axios = require("axios");
 router.get("/", getAdvisoryList);
 router.get("/:id", getAdvisoryById);
 
-// Function to get full country list from API
+// Function to get all travel advisories list from API
 async function getAdvisoryList(req, res) {
   try {
     const advisoryListResult = await axios(
@@ -19,7 +19,7 @@ async function getAdvisoryList(req, res) {
   }
 }
 
-// Get country by an international ISO 2 or 3 digit code. Returnes a single object
+// Get single country travel advisory using the 2 digit ISO country code
 async function getAdvisoryById(req, res) {
   try {
     const searchCode = req.params.id;
@@ -27,7 +27,7 @@ async function getAdvisoryById(req, res) {
       `https://www.travel-advisory.info/api?countrycode=${searchCode}`
     );
 
-    res.send(searchResult.data);
+    res.send(searchResult.data.data);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
