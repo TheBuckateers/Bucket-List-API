@@ -15,7 +15,7 @@ async function getFoodList(req, res) {
     const listRandomMeal = await axios(
       "https://www.themealdb.com/api/json/v1/1/random.php"
     );
-    res.send(listRandomMeal.data);
+    res.send(listRandomMeal.data.meals);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -40,7 +40,7 @@ async function listFoodAreas(req, res) {
     const searchResult = await axios(
       "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
     );
-    res.send(searchResult.data);
+    res.send(searchResult.data.meals);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

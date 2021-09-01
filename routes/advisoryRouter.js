@@ -13,7 +13,7 @@ async function getAdvisoryList(req, res) {
     const advisoryListResult = await axios(
       "https://www.travel-advisory.info/api"
     );
-    res.send(advisoryListResult.data);
+    res.send(advisoryListResult.data.data);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
