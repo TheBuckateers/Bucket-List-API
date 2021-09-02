@@ -61,7 +61,7 @@ async function getCountriesByPartial(req, res) {
   }
 }
 
-// Get country by an international ISO 2 or 3 digit code. Returnes a single object
+// Get pictures based on the country name (full) passed in
 async function getCountryPics(req, res) {
   try {
     const searchName = req.params.name;
