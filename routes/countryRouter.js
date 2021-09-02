@@ -71,7 +71,8 @@ async function getCountryPics(req, res) {
     const parsedData = searchResult.data.results.map((item) => {
       return {
         description: item.alt_description,
-        url: item.urls.small,
+        url_small: item.urls.small,
+        url_regular: item.urls.regular,
       };
     });
     res.send(parsedData);
