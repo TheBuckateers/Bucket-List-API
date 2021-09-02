@@ -8,6 +8,7 @@ router.get("/", getCountryList);
 router.get("/code/:code", getCountryByCode);
 router.get("/full/:name", getCountryByFullName);
 router.get("/partial/:name", getCountriesByPartial);
+router.get("/pics/:name", getCountryPics);
 
 // Function to get full country list from API
 async function getCountryList(req, res) {
@@ -55,6 +56,26 @@ async function getCountriesByPartial(req, res) {
     );
     // console.log("Partial: ", searchResult.data);
     res.send(searchResult.data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+// Get pictures based on the country name (full) passed in
+async function getCountryPics(req, res) {
+  try {
+    const searchName = req.params.name;
+    const searchResult = await axios(
+      `https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_API}&query=${searchName}`
+    );
+    const parsedData = searchResult.data.results.map((item) => {
+      return {
+        description: item.alt_description,
+        url_small: item.urls.small,
+        url_regular: item.urls.regular,
+      };
+    });
+    res.send(parsedData);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
