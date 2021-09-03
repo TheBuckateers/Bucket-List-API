@@ -26,7 +26,11 @@ app.get("*", (req, res) => {
   res.status(404).send("Page not found");
 });
 
-// *** change URL on .env once we deploy to hosted site  ***
+// *** change DATABASE_URL to 
+// MONGODB_URI is the MongoDB Atlas Server URL w/PW Connection to Application ***
+
+// Connects to our mongoDB with mongo shell
+// mongo "mongodb+srv://cluster0.btbni.mongodb.net/bucketList" --username AtlasAdmin
 // setup default db connection
 mongoose.connect(`${process.env.DATABASE_URL}/bucketList`, {
   useNewUrlParser: true,
