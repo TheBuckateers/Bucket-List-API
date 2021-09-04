@@ -28,17 +28,17 @@ app.get("*", (req, res) => {
 
 // *** change URL on .env once we deploy to hosted site  ***
 // setup default db connection
-mongoose.connect(`${process.env.DATABASE_URL}/bucketList`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(`${process.env.DATABASE_URL}/bucketList`, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
-// connect to the default db connection 
-const db = mongoose.connection;
+// connect to the default db connection
+// const db = mongoose.connection;
 // get notifications of connections errors
-db.on("error", (error) => console.error(error));
+// db.on("error", (error) => console.error(error));
 // get notified when connected to db
-db.once("open", () => console.log("Connected to Database"));
+// db.once("open", () => console.log("Connected to Database"));
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);

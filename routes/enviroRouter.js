@@ -6,7 +6,6 @@ const axios = require("axios");
 
 router.get("/", getEnviroInfo);
 
-
 // Get single country environment and weather info
 async function getEnviroInfo(req, res) {
   try {
