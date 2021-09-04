@@ -6,6 +6,7 @@ const axios = require("axios");
 
 router.get("/", getFoodList);
 router.get("/areas", listFoodAreas);
+router.get("/areas/:area", listFoodsByArea);
 router.get("/categories", listFoodCategories);
 router.get("/:id", getFoodById);
 
@@ -29,6 +30,18 @@ async function getFoodById(req, res) {
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${searchCode}`
     );
     res.send(searchResult.data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+async function listFoodsByArea(req, res) {
+  try {
+    const searchArea = req.params.area;
+    const searchResult = await axios(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchArea}`
+    );
+    res.send(searchResult.data.meals);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
