@@ -87,7 +87,7 @@ mongoose.connect(`${process.env.DATABASE_URL}/bucketList`, {
 
 
 // connect to the default db connection
-// const db = mongoose.connection;
+const db = mongoose.connection;
 // get notifications of connections errors
 
 db.on("error", (error) => console.error(error))
