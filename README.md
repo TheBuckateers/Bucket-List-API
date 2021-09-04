@@ -1,10 +1,14 @@
 # Bucket-List-API
 
-**Authors**: Heather Bisgaard, Willem Jacobs, Clarissa Pamonicutt, Mark Thanadabouth
+**Authors**
+Mark Thanadabouth, Full-Stack Developer / Italy
+Clarissa Pamonicutt, Full-Stack Developer / Japan
+Willem Jacobs, Software Developer/Astronaut / Iceland
+Heather Bisgaard, Full Stack Software Engineer / Iceland
 
-**Version**: 1.0.0
-**Deployed Site**: NONE
-**Backend Server** NONE
+- **Version**: 1.0.0
+- [**Deployed Site**](https://bucket-list-travel.netlify.app/)
+- [**Backend Server**](https://bucket-list-travel-api.herokuapp.com/)
 
 ## Overview
 
@@ -45,6 +49,8 @@ Within these routes you have:
 ## Change Log
 
 08.31.2021 (V1.0.0) - First release.
+
+9.2.2021 9:14pm - Deployed to Heroku/Netlify and MongoDB Atlas URL saved in .env.
 
 ## Credit and Collaborations
 
