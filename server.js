@@ -79,14 +79,17 @@ async function seed(req, res) {
 // https://github.com/vbchomp/seattle-code-301n22/tree/main/class-14
 
 // setup default db connection
+
 mongoose.connect(`${process.env.DATABASE_URL}/bucketList`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 
-// connect to the default db connection 
-const db = mongoose.connection;
+
+// connect to the default db connection
+// const db = mongoose.connection;
 // get notifications of connections errors
+
 db.on("error", (error) => console.error(error))
 
   // ***seed a few test buckets. delete .then, seed(), and closing}) before production***
@@ -95,6 +98,7 @@ db.on("error", (error) => console.error(error))
     // get notified when connected to db
     db.once("open", () => console.log("Connected to Database"));
   })
+
 
 
 app.listen(PORT, () => {
