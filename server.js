@@ -33,9 +33,16 @@ app.get("*", (req, res) => {
 
 // POST new note to db
 app.post('/bucketList', async (req, res) => {
-  let { countryCode, email, note } = req.body;
+  // let bucket = {
+  //   params: {
+  //     "CountryCode:": `country ${this.state.country.alpha2Code}`, 
+  //     "Email": `email ${this.props.auth0.user.email}`,
+  //     "Note": `note ${this.state.buckets.note}`,
+  //   },
+  // };
+  let { country, email, note } = req.body;
   try {
-    let newBucket = new BucketListModel({ countryCode, email, note });
+    let newBucket = new BucketListModel({ country, email, note });
     await newBucket.save();
     res.status(200).send(newBucket);
   }
