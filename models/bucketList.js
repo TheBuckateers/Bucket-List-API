@@ -7,7 +7,9 @@ const bucketListSchema = new mongoose.Schema({
   countryName: { type: String, required: true },
   countryLat: { type: String, required: true },
   countryLon: { type: String, required: true },
-  email: { type: String, required: true },
+  // comment back in once we get auth0 working
+  // email: { type: String, required: true },
+  note: { type: String},
 })
 
 const BucketListModel = mongoose.model('bucketList', bucketListSchema);
