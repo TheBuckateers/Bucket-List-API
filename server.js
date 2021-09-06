@@ -7,7 +7,7 @@ const cors = require("cors");
 app.use(cors());
 const mongoose = require("mongoose");
 app.use(express.json());
-const BucketListModel = require('./models/bucketList');
+const BucketListModel = require("./models/bucketList");
 
 const PORT = process.env.PORT || 3001;
 
@@ -29,6 +29,7 @@ app.use("/seed", seed);
 app.get("*", (req, res) => {
   res.status(404).send("Page not found");
 });
+
 
 // POST new note to db
 app.post('/bucketList', async (req, res) => {
@@ -68,7 +69,7 @@ async function seed(req, res) {
       countryLat: "-21.15",
       countryLon: "55.5",
       // email: "vbchomp@gmail.com" ,
-      note: "Maybe in a  few years."
+      note: "Maybe in a  few years.",
     });
     const testBucketThree = new BucketListModel({
       countryCode: "PT",
@@ -76,7 +77,7 @@ async function seed(req, res) {
       countryLat: "39.5",
       countryLon: "-8.0",
       // email: "vbchomp@gmail.com" ,
-      note: "On the top of my list of places that I want to go!"
+      note: "On the top of my list of places that I want to go!",
     });
     const testBucketFour = new BucketListModel({
       countryCode: "KZ",
@@ -84,20 +85,22 @@ async function seed(req, res) {
       countryLat: "48.0",
       countryLon: "68.0",
       // email: "vbchomp@gmail.com" ,
-      note: "I should look more into this."
+      note: "I should look more into this.",
     });
     testBucketOne.save();
     testBucketTwo.save();
     testBucketThree.save();
     testBucketFour.save();
-    console.log('I have excersiiiiiiiiiiized the database', "http://localhost:3001/seed");
-
+    console.log(
+      "I have excersiiiiiiiiiiized the database",
+      "http://localhost:3001/seed"
+    );
   }
-  console.log('DB has been seeded');
-} 
+  console.log("DB has been seeded");
+}
 
 // MONGODB_URI is the MongoDB Atlas Server URI saved as variable in heroku ***
-// snagged directions on how to setup connection for Atlas Server from 
+// snagged directions on how to setup connection for Atlas Server from
 // https://github.com/vbchomp/seattle-code-301n22/tree/main/class-14
 
 // setup default db connection
@@ -105,8 +108,7 @@ async function seed(req, res) {
 mongoose.connect(`${process.env.DATABASE_URL}/bucketList`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-})
-
+});
 
 // connect to the default db connection
 const db = mongoose.connection;
