@@ -30,6 +30,26 @@ app.get("*", (req, res) => {
   res.status(404).send("Page not found");
 });
 
+
+// POST new note to db
+app.post('/bucketList', async (req, res) => {
+  let { countryCode, countryName, countryLat, countryLon, note } = req.body;
+  // delete the line above and uncomment the line below once auth0 working to pull email
+  // let { countryCode, countryName, countryLat, countryLon, email, note } = req.body;
+  try {
+    let newBucket = new BucketListModel({ countryCode, countryName, countryLat, countryLon, note });
+    // delete the line above and uncomment the line below once auth0 working to pull email
+    // let newBucket = new BucketListModel({ countryCode, countryName, countryLat, countryLon, email, note });
+    await newBucket.save();
+    res.status(200).send(newBucket);
+  }
+  catch (err) {
+    console.log('error', err);
+    res.status(500).send('Server error');
+  }
+})
+
+
 // test seed the db
 // Seeding the database
 async function seed(req, res) {
@@ -40,28 +60,32 @@ async function seed(req, res) {
       countryName: "Colombia",
       countryLat: "4.0",
       countryLon: "-72.0",
-      email: "vbchomp@gmail.com",
+      // email: "vbchomp@gmail.com" ,
+      note: "sure, let's go",
     });
     const testBucketTwo = new BucketListModel({
       countryCode: "RE",
       countryName: "Reunion",
       countryLat: "-21.15",
       countryLon: "55.5",
-      email: "vbchomp@gmail.com",
+      // email: "vbchomp@gmail.com" ,
+      note: "Maybe in a  few years.",
     });
     const testBucketThree = new BucketListModel({
       countryCode: "PT",
       countryName: "Portugal",
       countryLat: "39.5",
       countryLon: "-8.0",
-      email: "vbchomp@gmail.com",
+      // email: "vbchomp@gmail.com" ,
+      note: "On the top of my list of places that I want to go!",
     });
     const testBucketFour = new BucketListModel({
       countryCode: "KZ",
       countryName: "Kazakhstan",
       countryLat: "48.0",
       countryLon: "68.0",
-      email: "vbchomp@gmail.com",
+      // email: "vbchomp@gmail.com" ,
+      note: "I should look more into this.",
     });
     testBucketOne.save();
     testBucketTwo.save();
@@ -97,7 +121,23 @@ db.on("error", (error) => console.error(error))
     seed();
     // get notified when connected to db
     db.once("open", () => console.log("Connected to Database"));
-  });
+  })
+
+
+//clearing the database - USE ONLY IN CASES OF EXTREME PARANOIA
+async function clear(req, res) {
+  try {
+    await BucketListModel.deleteMany({});
+    response.status(200).send('Ooops, I did again!');
+  }
+  catch (err) {
+    response.status(500).send('Uhhh, Houston we have a problem!');
+  }
+}
+
+// clear route - BE GENTLE with PARANOIA
+app.get('/clear', clear);
+
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
