@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const bucketListSchema = new mongoose.Schema({
-  countryCode: { type: String, required: true },
+  country: { type: String, required: true },
   email: { type: String, required: true },
   note: { type: String},
 })
