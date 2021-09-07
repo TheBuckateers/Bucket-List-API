@@ -33,13 +33,16 @@ app.get("*", (req, res) => {
 
 // POST new note to db
 app.post('/bucketList', async (req, res) => {
-  let { countryCode, countryName, countryLat, countryLon, note } = req.body;
-  // delete the line above and uncomment the line below once auth0 working to pull email
-  // let { countryCode, countryName, countryLat, countryLon, email, note } = req.body;
+  // let bucket = {
+  //   params: {
+  //     "CountryCode:": `country ${this.state.country.alpha2Code}`, 
+  //     "Email": `email ${this.props.auth0.user.email}`,
+  //     "Note": `note ${this.state.buckets.note}`,
+  //   },
+  // };
+  let { country, email, note } = req.body;
   try {
-    let newBucket = new BucketListModel({ countryCode, countryName, countryLat, countryLon, note });
-    // delete the line above and uncomment the line below once auth0 working to pull email
-    // let newBucket = new BucketListModel({ countryCode, countryName, countryLat, countryLon, email, note });
+    let newBucket = new BucketListModel({ country, email, note });
     await newBucket.save();
     res.status(200).send(newBucket);
   }
@@ -57,34 +60,22 @@ async function seed(req, res) {
   if (testBuckets.length === 0) {
     const testBucketOne = new BucketListModel({
       countryCode: "CO",
-      countryName: "Colombia",
-      countryLat: "4.0",
-      countryLon: "-72.0",
-      // email: "vbchomp@gmail.com" ,
+      email: "vbchomp@gmail.com" ,
       note: "sure, let's go",
     });
     const testBucketTwo = new BucketListModel({
       countryCode: "RE",
-      countryName: "Reunion",
-      countryLat: "-21.15",
-      countryLon: "55.5",
-      // email: "vbchomp@gmail.com" ,
+      email: "vbchomp@gmail.com" ,
       note: "Maybe in a  few years.",
     });
     const testBucketThree = new BucketListModel({
       countryCode: "PT",
-      countryName: "Portugal",
-      countryLat: "39.5",
-      countryLon: "-8.0",
-      // email: "vbchomp@gmail.com" ,
+      email: "vbchomp@gmail.com" ,
       note: "On the top of my list of places that I want to go!",
     });
     const testBucketFour = new BucketListModel({
       countryCode: "KZ",
-      countryName: "Kazakhstan",
-      countryLat: "48.0",
-      countryLon: "68.0",
-      // email: "vbchomp@gmail.com" ,
+      email: "vbchomp@gmail.com" ,
       note: "I should look more into this.",
     });
     testBucketOne.save();
