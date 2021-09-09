@@ -61,13 +61,27 @@ app.post('/bucketList', async (req, res) => {
   }
 })
 
-// PUT req to update bucket list in db
-app.put('/bucketList/:countryCode', async (req, res) => {
-  let bucketId = req.params.countryCode;
-  console.log('req.body:', req.body)
-  // user is defined with auth0
+// // PUT req to update bucket list in db
+// app.put('/bucketList/:countryCode', async (req, res) => {
+//   let bucketId = req.params.countryCode;
+//   console.log('req.body:', req.body)
+//   // user is defined with auth0
+//   try {
+//     await BucketListModel.findByIdAndDelete(bucketId, req.body);
+//     res.status(200).send('Updated your Bucket!');
+//   }
+//   catch (err) {
+//     console.log('updateError', err);
+//     res.status(500).send('Server error!');
+//   }
+// })
+
+// Marks
+// PUT req to update bucket list in db 
+app.put('/bucketList/:id', async (req, res) => {
+  let bucketId = req.params.id;
   try {
-    await BucketListModel.findByIdAndDelete(bucketId, req.body);
+    await BucketListModel.findByIdAndUpdate(bucketId, req.body);
     res.status(200).send('Updated your Bucket!');
   }
   catch (err) {
