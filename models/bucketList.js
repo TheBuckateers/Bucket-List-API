@@ -1,15 +1,14 @@
-"use strict";
+'use strict';
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const bucketListSchema = new mongoose.Schema({
+  country: { type: Object, required: true },
   countryCode: { type: String, required: true },
-  countryName: { type: String, required: true },
-  countryLat: { type: String, required: true },
-  countrLat: { type: String, required: true },
   email: { type: String, required: true },
-});
+  note: { type: String},
+})
 
-const bucketListModel = mongoose.model("bucketList", bucketListSchema);
+const BucketListModel = mongoose.model('bucketList', bucketListSchema);
 
-module.exports = bucketListModel;
+module.exports = BucketListModel;
