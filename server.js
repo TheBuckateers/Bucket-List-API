@@ -134,7 +134,7 @@ async function seed(req, res) {
   
   // setup default db connection
   
-  mongoose.connect(`${process.env.DATABASE_URL}/bucketList`, {
+  mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
